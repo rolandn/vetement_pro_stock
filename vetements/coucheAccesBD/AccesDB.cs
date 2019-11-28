@@ -44,8 +44,7 @@ namespace vetements.coucheAccesBD
 
             try
             {
-                conn = new NpgsqlCommand("select num_client, nom, prenom, email from CLIENT " +
-                    "order by Nom, Prenom", this.conn);
+                conn = new NpgsqlCommand("select * from listerClients()", this.conn);
 
                 Console.WriteLine("\n lister client \n");
                 NpgsqlDataReader sqlreader = conn.ExecuteReader();
@@ -81,8 +80,8 @@ namespace vetements.coucheAccesBD
             NpgsqlCommand SqlCmd = null;
             try
             {
-                SqlCmd = new NpgsqlCommand("insert into client ( num_client, nom, prenom, email) values " +
-                    "( :num_client, :nom, :prenom, :email)",this.conn);
+                SqlCmd = new NpgsqlCommand("select * from ajoutClient( :num_client, :nom, :prenom, :email)"
+                    ,this.conn);
 
                 // Ajout des paramètres
 
@@ -248,15 +247,14 @@ namespace vetements.coucheAccesBD
 
             try
             {
-                conn = new NpgsqlCommand("select idv, taille, prix, est_vendu, patron_id, magasin_id from VETEMENT " +
-                    "order by magasin_id, taille", this.conn);
+                conn = new NpgsqlCommand("select * from listerVetement()", this.conn);
 
                 Console.WriteLine("\n lister vetements \n");
                 NpgsqlDataReader sqlreader = conn.ExecuteReader();
 
                 if (sqlreader.Read())
                 {
-                    Console.WriteLine("\n construit la liste");
+                   // Console.WriteLine("\n construit la liste");
                     liste_vet = new List<vetement>();
 
                     do
