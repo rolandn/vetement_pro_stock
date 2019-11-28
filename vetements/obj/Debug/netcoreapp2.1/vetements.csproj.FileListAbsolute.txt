@@ -1,0 +1,15 @@
+C:\Users\rolan\source\repos\vetements\vetements\obj\Debug\netcoreapp2.1\vetements.csprojAssemblyReference.cache
+C:\Users\rolan\source\repos\vetements\vetements\obj\Debug\netcoreapp2.1\vetements.csproj.CoreCompileInputs.cache
+C:\Users\rolan\source\repos\vetements\vetements\obj\Debug\netcoreapp2.1\vetements.AssemblyInfoInputs.cache
+C:\Users\rolan\source\repos\vetements\vetements\obj\Debug\netcoreapp2.1\vetements.AssemblyInfo.cs
+C:\Users\rolan\source\repos\vetements\vetements\bin\Debug\netcoreapp2.1\vetements.deps.json
+C:\Users\rolan\source\repos\vetements\vetements\bin\Debug\netcoreapp2.1\vetements.runtimeconfig.json
+C:\Users\rolan\source\repos\vetements\vetements\bin\Debug\netcoreapp2.1\vetements.runtimeconfig.dev.json
+C:\Users\rolan\source\repos\vetements\vetements\bin\Debug\netcoreapp2.1\vetements.dll
+C:\Users\rolan\source\repos\vetements\vetements\bin\Debug\netcoreapp2.1\vetements.pdb
+C:\Users\rolan\source\repos\vetements\vetements\bin\Debug\netcoreapp2.1\Npgsql.dll
+C:\Users\rolan\source\repos\vetements\vetements\bin\Debug\netcoreapp2.1\Npgsql.pdb
+C:\Users\rolan\source\repos\vetements\vetements\bin\Debug\netcoreapp2.1\Npgsql.xml
+C:\Users\rolan\source\repos\vetements\vetements\obj\Debug\netcoreapp2.1\vetements.csproj.CopyComplete
+C:\Users\rolan\source\repos\vetements\vetements\obj\Debug\netcoreapp2.1\vetements.dll
+C:\Users\rolan\source\repos\vetements\vetements\obj\Debug\netcoreapp2.1\vetements.pdb
