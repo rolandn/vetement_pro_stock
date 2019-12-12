@@ -133,10 +133,7 @@ namespace vetements.coucheAccesBD
 
             try
             {
-                SqlCmd = new NpgsqlCommand("select client.num_client, client.nom, client.prenom, client.email " +
-                    "from achat inner join client on client.num_client = achat.id_client "+
-                    "where achat.date > :achat.date "+
-                    "order by Nom, Prenom", this.conn);
+                SqlCmd = new NpgsqlCommand("select * from listerClientsAcheteur( :achat.date)", this.conn);
 
 
                 // Ajout du paramètre date
@@ -173,6 +170,7 @@ namespace vetements.coucheAccesBD
             catch (Exception e)
             {
                 throw new ExceptionAccesBD("Connexion  la BD : ", e.Message);
+                
             }
 
             return liste;
@@ -189,10 +187,7 @@ namespace vetements.coucheAccesBD
 
             try
             {
-                SqlCmd = new NpgsqlCommand("select client.num_client, client.nom, client.prenom, client.email " +
-                    "from achat inner join client on client.num_client = achat.id_client " +
-                    "where achat.date NOT BETWEEN :achat.date AND NOW() " +
-                    "order by Nom, Prenom", this.conn);
+                SqlCmd = new NpgsqlCommand("select * from listerClientsPasAcheteur( :achat.date)", this.conn);
 
 
                 // Ajout du paramètre date
