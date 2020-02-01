@@ -283,9 +283,11 @@ namespace vetements.coucheAccesBD
 
             try
             {
-                conn = new NpgsqlCommand("select idv, taille, prix, est_vendu, patron_id, magasin_id from VETEMENT " +
-                    " where est_vendu = FALSE " +
-                    "order by magasin_id, taille", this.conn);
+                conn = new NpgsqlCommand("select * from listertousvetementsnonvendus()", this.conn);
+
+             //   conn = new NpgsqlCommand("select idv, taille, prix, est_vendu, patron_id, magasin_id from VETEMENT " +
+             //       " where est_vendu = FALSE " +
+             //       "order by magasin_id, taille", this.conn);
 
                 Console.WriteLine("\n lister vetements \n");
                 NpgsqlDataReader sqlreader = conn.ExecuteReader();
@@ -328,10 +330,7 @@ namespace vetements.coucheAccesBD
 
             try
             {
-                SqlCmd = new NpgsqlCommand("select vetement.idv, vetement.taille, vetement.prix, vetement.est_vendu, vetement.patron_id, vetement.magasin_id " +
-                    "from achat inner join vetement on vetement.idv = achat.id_vetement " +
-                    "where achat.date = :achat.date  " +
-                    "order by idv, taille", this.conn);
+                SqlCmd = new NpgsqlCommand("select * from listervetementsvendudate( :achat.date)", this.conn);
 
 
                 // Ajout du paramètre date
@@ -382,8 +381,7 @@ namespace vetements.coucheAccesBD
             NpgsqlCommand SqlCmd = null;
             try
             {
-                SqlCmd = new NpgsqlCommand("insert into vetement ( idv, taille, prix, patron_id, est_vendu, magasin_id) values " +
-                    "( :idv, :taille, :prix, :patron_id, :est_vendu, :magasin_id)", this.conn);
+                SqlCmd = new NpgsqlCommand("select * from ajoutervetement ( :idv, :taille, :prix, :patron_id, :est_vendu, :magasin_id)", this.conn);
 
                 // Ajout des paramètres
 
@@ -444,10 +442,7 @@ namespace vetements.coucheAccesBD
 
             try
             {
-                SqlCmd = new NpgsqlCommand("select vetement.idv, vetement.taille, vetement.prix, vetement.est_vendu, vetement.patron_id, vetement.magasin_id " +
-                    "from achat inner join vetement on vetement.idv = achat.id_vetement " +
-                    "where achat.id_client = :achat.id_client  " +
-                    "order by date", this.conn);
+                SqlCmd = new NpgsqlCommand("select * from listervetementsvenduclient ( :achat.id_client)", this.conn);
 
 
                 // Ajout du paramètre date

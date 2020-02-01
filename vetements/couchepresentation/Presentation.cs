@@ -19,6 +19,8 @@ namespace vetements.couchepresentation
             catch (ExceptionAccesBD e)
             {
                 Console.WriteLine("\n Accès à la DB impossible (" + e.Message + ")");
+                AccesConsole.Attendre();
+       
                 System.Environment.Exit(0);
             }
         }
@@ -147,6 +149,8 @@ namespace vetements.couchepresentation
                 {
                     Console.WriteLine("\n Menu principal ( " +
                         e.Message + ")");
+                    AccesConsole.Attendre();
+                    break;
                 }
 
             }
