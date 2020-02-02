@@ -35,7 +35,7 @@ namespace vetements.coucheAccesBD
 
         // //////////////////// LES CLIENTS  /////////////////////////////////////////////////////////
 
-            // Lister les clients  ////////////////////////////////
+            // 1) Lister les clients  ////////////////////////////////
 
         public List<client> ListerClients()
         {
@@ -73,7 +73,7 @@ namespace vetements.coucheAccesBD
             return liste;
         }
 
-        // Ajouter un client /////////////////////////////////////
+        // 2) Ajouter un client /////////////////////////////////////
 
         public int AjoutClient(client client)
         {
@@ -122,7 +122,7 @@ namespace vetements.coucheAccesBD
             }
         }
 
-        // Lister les clients ayant fait un achat depuis une certaine date /////////////////////////////////////
+        // 3 Lister les clients ayant fait un achat depuis une certaine date /////////////////////////////////////
 
         public List<client> ListerClientsAcheteur(DateTime date_introduite)
         {
@@ -176,7 +176,7 @@ namespace vetements.coucheAccesBD
             return liste;
         }
 
-        // Lister les clients N'ayant PAS fait un achat depuis une certaine date /////////////////////////////////////
+        // 4 Lister les clients N'ayant PAS fait un achat depuis une certaine date /////////////////////////////////////
 
         public List<client> ListerClientsPasAcheteur(DateTime date_introduite)
         {
@@ -233,7 +233,7 @@ namespace vetements.coucheAccesBD
         /// /////////////////////////// LES VETEMENTS  ////////////////////////////////:
        
 
-        // Lister les vêtements tous magasins confondus
+        // 5 Lister les vêtements tous magasins confondus
 
         public List<vetement> ListerTousVetements()
         {
@@ -274,7 +274,7 @@ namespace vetements.coucheAccesBD
             return liste_vet;
         }
 
-        // ////////////////  Lister les vêtements non vendus   ///////////////////////////////////////////////////
+        // ////////////////  6 Lister les vêtements non vendus   ///////////////////////////////////////////////////
 
         public List<vetement> ListerTousVetementsNonVendus()
         {
@@ -319,7 +319,7 @@ namespace vetements.coucheAccesBD
             return liste_vet;
         }
 
-        // ////////// Lister les vêtements vendus à une certaine date /////////////////////////////////////
+        // ////////// 7 Lister les vêtements vendus à une certaine date /////////////////////////////////////
 
         public List<vetement> ListerVetementsVenduDate(DateTime date_introduite)
         {
@@ -374,7 +374,7 @@ namespace vetements.coucheAccesBD
             return liste;
         }
 
-        // /////////////////// Ajouter/créer un vêtement //////////////////////////////////////////////
+        // /////////////////// 8 Ajouter/créer un vêtement //////////////////////////////////////////////
 
         public int AjoutVetement(vetement vetement)
         {
@@ -430,7 +430,7 @@ namespace vetements.coucheAccesBD
             }
         }
 
-        // ////////////// Lister les vêtements acheté pour un client donné (ordonné par date d'achat)  ////////////////////////
+        // ////////////// 9 Lister les vêtements acheté pour un client donné (ordonné par date d'achat)  ////////////////////////
 
 
         public List<vetement> ListerVetementsVenduClient(int id_introduit)
@@ -486,7 +486,7 @@ namespace vetements.coucheAccesBD
             return liste;
         }
 
-        // ////////////// Lister les vêtements non acheté pour un patron donné et une taille donnée ou toutes les tailles/////////
+        // ////////////// 10 Lister les vêtements non acheté pour un patron donné et une taille donnée ou toutes les tailles/////////
 
 
         public List<vetement> ListerVetementsNonVenduPatronTaille(int patron_id, string taille)
@@ -499,9 +499,7 @@ namespace vetements.coucheAccesBD
             {
                 try
                 {
-                    SqlCmd = new NpgsqlCommand("select idv, taille, prix, est_vendu, patron_id, magasin_id " +
-                        "from vetement where patron_id = :patron_id AND est_vendu = FALSE " +
-                        "order by taille", this.conn);
+                    SqlCmd = new NpgsqlCommand("select * from listerVetementsNonVenduPatronTaille( :patron_id)", this.conn);
 
 
                     // Ajout du paramètre id_patron et id_taille
@@ -553,9 +551,7 @@ namespace vetements.coucheAccesBD
             {
                 try
                 {
-                    SqlCmd = new NpgsqlCommand("select idv, taille, prix, est_vendu, patron_id, magasin_id " +
-                        "from vetement where taille = :taille AND patron_id = :patron_id AND est_vendu = FALSE " +
-                        "order by taille", this.conn);
+                    SqlCmd = new NpgsqlCommand("select * from listerVetementsNonVenduPatronTailleFull( :patron_id, :taille)", this.conn);
 
 
                     // Ajout du paramètre id_patron et id_taille
@@ -603,7 +599,7 @@ namespace vetements.coucheAccesBD
             
         }
 
-        // ////////////// Lister les vêtements non acheté pour une date donnée ou et un magasin donnée ou toutes les magasins/////////
+        // ////////////// 11 Lister les vêtements non acheté pour une date donnée ou et un magasin donnée ou toutes les magasins/////////
 
 
         public List<vetement> ListerVetementsVenduDateMagasin(DateTime date, int id_magasin)
@@ -615,10 +611,7 @@ namespace vetements.coucheAccesBD
 
             try
             {
-                SqlCmd = new NpgsqlCommand("select vetement.idv, vetement.taille, vetement.prix, vetement.est_vendu, vetement.patron_id, vetement.magasin_id " +
-                    "from achat inner join vetement on vetement.idv = achat.id_vetement " +
-                    "where achat.date = :achat.date AND achat.id_magasin = :achat.id_magasin AND est_vendu = TRUE " +
-                    "order by date", this.conn);
+                SqlCmd = new NpgsqlCommand("select * from listerVetementsVenduDateMagasin( :achat.date, :achat.id_magasin", this.conn);
 
 
                 // Ajout du paramètre date
@@ -666,7 +659,7 @@ namespace vetements.coucheAccesBD
 
         }
 
-        ///  //////////////// Méthode EXISTE pour voir si un VETEMENT existe dans la DB //////////////
+        ///  ////////////////12 Méthode EXISTE pour voir si un VETEMENT existe dans la DB //////////////
         
         public int existe(int id_cherche)
         {
@@ -676,8 +669,7 @@ namespace vetements.coucheAccesBD
             int trouve = 0;
             try
             {
-                SqlCmd = new NpgsqlCommand("select * from vetement " +
-                    " where idv = :idv", this.conn);
+                SqlCmd = new NpgsqlCommand("select * from existe ( :idv)", this.conn);
 
                 // Ajout du paramètre idv
 
@@ -708,7 +700,7 @@ namespace vetements.coucheAccesBD
             }
         }
 
-        ///  //////////////// Méthode EXISTE pour voir si un MAGASIN existe dans la DB //////////////
+        ///  ////////////////13 Méthode EXISTE pour voir si un MAGASIN existe dans la DB //////////////
 
         public int magasin_existe(int id_magasin_cherche)
         {
@@ -718,8 +710,7 @@ namespace vetements.coucheAccesBD
             int trouve = 0;
             try
             {
-                SqlCmd = new NpgsqlCommand("select * from magasin " +
-                    " where id = :id", this.conn);
+                SqlCmd = new NpgsqlCommand("select * from existeMagasin( :id)", this.conn);
 
                 // Ajout du paramètre idv
 
@@ -750,7 +741,7 @@ namespace vetements.coucheAccesBD
             }
         }
 
-        // ///////////////// Encoder le fait qu’un vêtement est vendu  ///////////////////////////////////////
+        // /////////////////14 Encoder le fait qu’un vêtement est vendu  ///////////////////////////////////////
 
         public int VetementVendu(vetement vetement)
         {
@@ -760,8 +751,7 @@ namespace vetements.coucheAccesBD
 
             try
             {
-                SqlCmd = new NpgsqlCommand("update vetement set est_vendu " +
-                    "= TRUE where idv = :idv", this.conn);
+                SqlCmd = new NpgsqlCommand("select * from vetementVendu ( :idv)", this.conn);
 
 
                 // Ajout du paramètre idv
@@ -797,7 +787,7 @@ namespace vetements.coucheAccesBD
             }
         }
 
-        // ///////////////// Déplacer une vêtement d'un magasin à l'autre  ///////////////////////////////////////
+        // /////////////////15 Déplacer une vêtement d'un magasin à l'autre  ///////////////////////////////////////
 
         public int VetementDeplace(vetement vetement)
         {
@@ -846,7 +836,7 @@ namespace vetements.coucheAccesBD
             }
         }
 
-        // /////////////////  Ajouter un patron /////////////////////////////////////
+        // /////////////////16  Ajouter un patron /////////////////////////////////////
 
         public int AjoutPatron(patron patron)
         {
@@ -896,7 +886,7 @@ namespace vetements.coucheAccesBD
             }
         }
 
-        // ////////////   Lister les patrons  ////////////////////////////////
+        // //////////// 17  Lister les patrons  ////////////////////////////////
 
         public List<patron> ListerPatrons()
         {
@@ -936,7 +926,7 @@ namespace vetements.coucheAccesBD
             return liste;
         }
 
-        // /////////////////  Ajouter un patron /////////////////////////////////////
+        // ///////////////// 18 Ajouter un patron /////////////////////////////////////
 
         public int AjoutPrestation(travail travail)
         {
