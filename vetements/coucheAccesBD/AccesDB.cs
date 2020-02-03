@@ -797,8 +797,7 @@ namespace vetements.coucheAccesBD
 
             try
             {
-                SqlCmd = new NpgsqlCommand("update vetement set magasin_id = :magasin_id" +
-                    " where idv = :idv", this.conn);
+                SqlCmd = new NpgsqlCommand("select * from deplacerVetement( :idv, :magasin_id)", this.conn);
 
 
                 // Ajout du paramètre idv
@@ -845,8 +844,7 @@ namespace vetements.coucheAccesBD
 
             try
             {
-                SqlCmd = new NpgsqlCommand("insert into patron ( idp, label, type) values " +
-                    "( :idp, :label, :Type)", this.conn);
+                SqlCmd = new NpgsqlCommand(" select * from ajoutePatron( :idp, :label, :Type)", this.conn);
 
                 // Ajout des paramètres
 
@@ -896,8 +894,7 @@ namespace vetements.coucheAccesBD
 
             try
             {
-                conn = new NpgsqlCommand("select idp, label, type from patron " +
-                    "order by idp", this.conn);
+                conn = new NpgsqlCommand(" select * from listerPatron() ", this.conn);
 
                 Console.WriteLine("\n lister patrons \n");
                 NpgsqlDataReader sqlreader = conn.ExecuteReader();
@@ -926,7 +923,7 @@ namespace vetements.coucheAccesBD
             return liste;
         }
 
-        // ///////////////// 18 Ajouter un patron /////////////////////////////////////
+        // ///////////////// 18 Ajouter une prestation /////////////////////////////////////
 
         public int AjoutPrestation(travail travail)
         {
@@ -935,8 +932,7 @@ namespace vetements.coucheAccesBD
 
             try
             {
-                SqlCmd = new NpgsqlCommand("insert into travail ( code, reg_nat, jour) values " +
-                    "( :code, :reg_nat, :jour)", this.conn);
+                SqlCmd = new NpgsqlCommand("select * from ajouterTravail( :code, :reg_nat, :jour)", this.conn);
 
                 // Ajout des paramètres
 
